@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lotex Clothing | B2B Wholesale ERP – Kozhikode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --sidebar-bg: #e8f5e9;
+      --sidebar-active: #1b5e20;
+      --sidebar-text: #2e4a32;
+      --header-bg: #ffffff;
+      --main-bg: #f1f8f2;
+      --card-bg: #ffffff;
+      --green-dark: #0d3b2e;
+      --green-mid: #1b5e20;
+      --border: #d4e5d7;
+      --text-dark: #1a1a1a;
+      --text-muted: #5a6a5e;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--main-bg);
+      color: var(--text-dark);
+      display: flex;
+      min-height: 100vh;
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+
+    /* ========== SIDEBAR ========== */
+    .sidebar {
+      width: 240px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 50;
+    }
+
+    .sidebar-brand {
+      padding: 18px 16px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #1b5e20, #0d3b2e);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-weight: 800; font-size: 14px;
+    }
+
+    .logo-text .name {
+      font-weight: 800; font-size: 15px; letter-spacing: 0.5px;
+      color: #0d3b2e; line-height: 1.1;
+    }
+
+    .logo-text .sub {
+      font-size: 10px; font-weight: 600; color: #4a6b4e;
+      letter-spacing: 0.3px; text-transform: uppercase;
+    }
+
+    .erp-label {
+      font-size: 10px; color: #5a6a5e; margin-top: 2px;
+      margin-left: 46px; font-weight: 600; letter-spacing: 0.4px;
+    }
+
+    .hub-status {
+      margin-top: 12px;
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11.5px; color: var(--text-muted);
+      background: rgba(255,255,255,0.6);
+      padding: 6px 10px; border-radius: 6px;
+    }
+
+    .status-dot {
+      width: 7px; height: 7px; background: #22c55e; border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(34,197,94,0.25);
+    }
+
+    .nav {
+      flex: 1; padding: 12px 10px; overflow-y: auto;
+    }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; border-radius: 8px;
+      color: var(--sidebar-text); font-weight: 500;
+      cursor: pointer; margin-bottom: 2px; transition: all 0.15s;
+      text-decoration: none; font-size: 13px;
+    }
+
+    .nav-item:hover { background: rgba(27,94,32,0.08); }
+    .nav-item.active {
+      background: var(--sidebar-active); color: white;
+    }
+
+    .nav-item svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    .sidebar-bottom {
+      padding: 12px; border-top: 1px solid var(--border);
+      font-size: 11px; color: var(--text-muted);
+    }
+
+    .hub-nodes-box {
+      background: white; border-radius: 8px; padding: 10px;
+      border: 1px solid var(--border); margin-bottom: 10px;
+    }
+
+    .hub-nodes-box h4 {
+      font-size: 11px; font-weight: 700; color: #1b5e20; margin-bottom: 4px;
+    }
+
+    /* ========== MAIN ========== */
+    .main {
+      margin-left: 240px; flex: 1; min-width: 0;
+      display: flex; flex-direction: column;
+    }
+
+    .topbar {
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 40;
+    }
+
+    .topbar-left {
+      display: flex; align-items: center; gap: 14px;
+    }
+
+    .top-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-weight: 700; font-size: 13px; color: #0d3b2e;
+    }
+
+    .hub-badge {
+      background: #e8f5e9; border: 1px solid #c8e6c9;
+      border-radius: 20px; padding: 4px 12px;
+      font-size: 12px; font-weight: 500;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .hub-badge .online { color: #16a34a; font-weight: 600; }
+
+    .topbar-right {
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .badge-btn {
+      background: #f0fdf4; border: 1px solid #bbf7d0;
+      border-radius: 8px; padding: 5px 12px;
+      font-size: 12px; font-weight: 600; color: #166534;
+    }
+
+    .orders-badge {
+      background: #f0fdf4; border: 1px solid #bbf7d0;
+      border-radius: 8px; padding: 5px 12px;
+      font-size: 12px; font-weight: 500;
+    }
+
+    .notif { position: relative; cursor: pointer; }
+    .notif .dot {
+      position: absolute; top: -2px; right: -2px;
+      width: 8px; height: 8px; background: #ef4444; border-radius: 50%;
+    }
+
+    .partner-badge {
+      background: #1b5e20; color: white; border-radius: 20px;
+      padding: 5px 14px; font-size: 12px; font-weight: 600;
+      line-height: 1.25; text-align: center;
+    }
+
+    .avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: #1b5e20; color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px;
+    }
+
+    .content { padding: 20px; }
+
+    /* Hero */
+    .hero-banner {
+      background: linear-gradient(135deg, #0d3b2e 0%, #1b5e20 50%, #0d3b2e 100%);
+      border-radius: 14px; padding: 22px 26px; color: white;
+      margin-bottom: 18px; position: relative; overflow: hidden;
+    }
+
+    .hero-tag {
+      display: inline-block; background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25); border-radius: 6px;
+      padding: 3px 10px; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.3px; margin-bottom: 10px;
+    }
+
+    .hero-banner h2 {
+      font-size: 22px; font-weight: 700; margin-bottom: 6px;
+    }
+
+    .hero-banner p {
+      font-size: 13px; opacity: 0.85; max-width: 640px;
+    }
+
+    /* Metrics */
+    .metrics {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 14px; margin-bottom: 18px;
+    }
+
+    .metric-card {
+      background: white; border-radius: 12px; padding: 16px 18px;
+      border: 1px solid var(--border);
+    }
+
+    .metric-card .label {
+      font-size: 11px; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.4px;
+      margin-bottom: 8px; display: flex; justify-content: space-between;
+    }
+
+    .metric-card .value {
+      font-size: 26px; font-weight: 800; line-height: 1.1;
+    }
+
+    .metric-card .sub {
+      font-size: 12px; color: var(--text-muted); margin-top: 4px;
+    }
+
+    .metric-card .change {
+      font-size: 12px; font-weight: 600; color: #16a34a; margin-top: 2px;
+    }
+
+    .badge-green {
+      display: inline-block; background: #dcfce7; color: #166534;
+      font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px;
+    }
+
+    /* Quick + Cotton */
+    .quick-row {
+      display: grid; grid-template-columns: 1fr 280px;
+      gap: 14px; margin-bottom: 18px;
+    }
+
+    .quick-exec, .cotton-index {
+      background: white; border-radius: 12px; padding: 14px 18px;
+      border: 1px solid var(--border);
+    }
+
+    .quick-exec h3 {
+      font-size: 13px; font-weight: 600; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .quick-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .qbtn {
+      background: #f0fdf4; border: 1px solid #bbf7d0;
+      border-radius: 8px; padding: 8px 14px;
+      font-size: 12px; font-weight: 600; color: #166534;
+      cursor: pointer; transition: all 0.15s;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .qbtn:hover { background: #dcfce7; }
+
+    .cotton-index .title {
+      font-size: 12px; font-weight: 600; color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .cotton-index .price { font-size: 20px; font-weight: 800; }
+    .cotton-index .change-up {
+      font-size: 12px; font-weight: 600; color: #16a34a; margin-left: 8px;
+    }
+    .cotton-index .source {
+      font-size: 11px; color: var(--text-muted); margin-top: 4px;
+    }
+
+    /* Bottom */
+    .bottom-grid {
+      display: grid; grid-template-columns: 1fr 320px; gap: 14px;
+    }
+
+    .lots-panel {
+      background: white; border-radius: 12px;
+      border: 1px solid var(--border); overflow: hidden;
+    }
+
+    .lots-header {
+      padding: 14px 18px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .lots-header h3 {
+      font-size: 14px; font-weight: 700;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .lots-header .sub {
+      font-size: 12px; color: var(--text-muted); font-weight: 400;
+    }
+
+    .lots-tools { display: flex; gap: 8px; align-items: center; }
+
+    .search-input {
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 6px 12px; font-size: 12px; width: 180px; outline: none;
+    }
+
+    .search-input:focus { border-color: #1b5e20; }
+
+    .filter-select {
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 6px 10px; font-size: 12px; background: white;
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    th {
+      text-align: left; padding: 10px 14px; background: #f8faf8;
+      font-weight: 600; color: var(--text-muted); font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.3px;
+      border-bottom: 1px solid var(--border);
+    }
+    td { padding: 11px 14px; border-bottom: 1px solid #f0f4f0; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8fdf8; }
+
+    .status-ready {
+      background: #1b5e20; color: white; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 6px; display: inline-block;
+    }
+
+    .status-pending {
+      background: #fef3c7; color: #92400e; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 6px; display: inline-block;
+    }
+
+    /* Telemetry */
+    .telemetry {
+      background: white; border-radius: 12px;
+      border: 1px solid var(--border); padding: 14px 16px;
+    }
+
+    .telemetry h3 {
+      font-size: 14px; font-weight: 700; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .telemetry-item {
+      background: #f8faf8; border-radius: 10px; padding: 12px 14px;
+      margin-bottom: 10px; border: 1px solid #e8f0e8;
+    }
+
+    .telemetry-item:last-child { margin-bottom: 0; }
+
+    .telemetry-item .top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .telemetry-item .name { font-weight: 600; font-size: 13px; }
+    .telemetry-item .cap { font-size: 12px; font-weight: 700; color: #1b5e20; }
+    .telemetry-item .line { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+    .telemetry-item .meta {
+      font-size: 11px; color: var(--text-muted);
+      display: flex; justify-content: space-between;
+    }
+
+    .cap-bar {
+      height: 6px; background: #e0e7e0; border-radius: 4px;
+      overflow: hidden; margin-top: 6px;
+    }
+
+    .cap-bar .fill {
+      height: 100%; background: linear-gradient(90deg, #1b5e20, #4ade80);
+      border-radius: 4px;
+    }
+
+    @media (max-width: 1200px) {
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .quick-row, .bottom-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .metrics { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-row">
+        <div class="logo-icon">L</div>
+        <div class="logo-text">
+          <div class="name">LOTEX</div>
+          <div class="sub">CLOTHING</div>
+        </div>
+      </div>
+      <div class="erp-label">B2B WHOLESALE ERP</div>
+      <div class="hub-status">
+        <span class="status-dot"></span>
+        Kozhikode Central Hub • Online
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item active" href="#">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+        Overview & Inventory Hub
+      </a>
+      <a class="nav-item" href="#">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        B2B Catalog & Bulk Lots
+      </a>
+      <a class="nav-item" href="#">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+        Production & Loom Mills
+      </a>
+      <a class="nav-item" href="#">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+        Dispatch & Logistics
+      </a>
+      <a class="nav-item" href="#">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        Invoices & Credit Ledger
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="hub-nodes-box">
+        <h4>Hub Nodes</h4>
+        <div>Kerala Core</div>
+        <div>Valiyangadi & Mavoor Rd</div>
+        <div>Dispatch: Calicut Terminal 1</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:10px">
+        <span>Lotex ERP v3.4.2</span>
+        <span style="color:#16a34a;font-weight:600">GST Ready</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="top-logo">
+          <div class="logo-icon" style="width:28px;height:28px;font-size:12px">L</div>
+          LOTEX WHOLESALE • KOZHIKODE
+        </div>
+        <div class="hub-badge">
+          📍 Hub: Valiyangadi & Mavoor Rd, Kozhikode • <span class="online">ONLINE</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="badge-btn">INR ₹  B2B Net</div>
+        <div class="orders-badge">Orders: 14 Active Lots</div>
+        <div class="notif">
+          <svg width="20" height="20" fill="none" stroke="#555" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          <span class="dot"></span>
+        </div>
+        <div class="partner-badge">Malabar Apparels Co-op<br><span style="font-size:10px;opacity:0.85">Tier 1 Wholesale Partner</span></div>
+        <div class="avatar">M</div>
+      </div>
+    </header>
+
+    <div class="content">
+      <div class="hero-banner">
+        <div class="hero-tag">KERALA CORE TERMINAL  ID: LTX-HUB-01 // VALIYANGADI</div>
+        <h2>Malabar Wholesale Sourcing & Distribution Hub</h2>
+        <p>Live monitoring of central fabric warehousing, loom mill runs, and high-volume dispatch logistics for Calicut, Kannur, and Coimbatore trading rings.</p>
+      </div>
+
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="label">READY WHOLESALE STOCK <span>🏭</span></div>
+          <div class="value">148,250</div>
+          <div class="sub">Units • Valiyangadi & Beypore Depots</div>
+          <div class="change">+6.4% wk</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">ACTIVE BULK RUNS <span>📋</span></div>
+          <div class="value">42</div>
+          <div class="sub">Bulk Lots • Lungis, Kasavu, Knits</div>
+          <div class="badge-green" style="margin-top:4px">8 in Loom</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">PENDING DISPATCH <span>🚚</span></div>
+          <div class="value">28</div>
+          <div class="sub">Shipments • Kerala & TN Delivery</div>
+          <div class="change">₹34.8L Today</div>
+        </div>
+        <div class="metric-card">
+          <div class="label">TRADE CREDIT BALANCE <span>💳</span></div>
+          <div class="value">₹1.12</div>
+          <div class="sub">Crore</div>
+          <div class="change">94% in 30d</div>
+        </div>
+      </div>
+
+      <div class="quick-row">
+        <div class="quick-exec">
+          <h3>⚡ ERP Quick Exec:</h3>
+          <div class="quick-btns">
+            <button class="qbtn">📦 Book Bulk Lot</button>
+            <button class="qbtn">📄 Generate Kerala E-Way Bill</button>
+            <button class="qbtn">🔄 Transfer Bale/Rolls</button>
+            <button class="qbtn">📊 Yarn Spot Index</button>
+          </div>
+        </div>
+        <div class="cotton-index">
+          <div class="title">● SOUTH INDIA COTTON INDEX</div>
+          <div>
+            <span class="price">40s Combed: ₹288.50</span>
+            <span class="change-up">+1.2%</span>
+          </div>
+          <div class="source">/ kg • MCX Cochin Spot</div>
+        </div>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="lots-panel">
+          <div class="lots-header">
+            <div>
+              <h3>📋 Live Bulk Wholesale Lots</h3>
+              <div class="sub">Calicut Central Depots (Valiyangadi & Mavoor Rd Vaults)</div>
+            </div>
+            <div class="lots-tools">
+              <input class="search-input" type="text" placeholder="Filter Lot, Fabric, Bay..." id="lotFilter" onkeyup="filterLots()">
+              <select class="filter-select">
+                <option>All Bay Lines</option>
+                <option>Bay A</option>
+                <option>Bay B</option>
+                <option>Bay C</option>
+              </select>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>LOT ID</th>
+                  <th>FABRIC / SPEC</th>
+                  <th>COUNT / GSM</th>
+                  <th>LOT STOCK</th>
+                  <th>MOQ</th>
+                  <th>WHOLESALE RATE</th>
+                  <th>BAY NODE</th>
+                  <th>STATUS</th>
+                </tr>
+              </thead>
+              <tbody id="lotsBody">
+                <tr>
+                  <td><strong>#LTX-8041</strong></td>
+                  <td>Malabar Double Mundu (Kasavu Gold)<br><small style="color:#666">100% Fine Combed Cotton / Zari Border</small></td>
+                  <td>100s × 100s</td>
+                  <td>8,400 pcs</td>
+                  <td>250 pcs</td>
+                  <td>₹345.00</td>
+                  <td>Bay A-03</td>
+                  <td><span class="status-ready">Ready to Ship</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#LTX-8038</strong></td>
+                  <td>Calicut Chequered Lungi (Mercerised)<br><small style="color:#666">60s × 60s Soft Finish</small></td>
+                  <td>60s × 60s</td>
+                  <td>24,500 pcs</td>
+                  <td>500 pcs</td>
+                  <td>₹182.50</td>
+                  <td>Bay A-07</td>
+                  <td><span class="status-ready">Ready to Ship</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#LTX-8029</strong></td>
+                  <td>Kannur Handloom Kasavu Saree Border<br><small style="color:#666">Pure Zari Work / Traditional</small></td>
+                  <td>80s × 80s</td>
+                  <td>3,200 pcs</td>
+                  <td>100 pcs</td>
+                  <td>₹890.00</td>
+                  <td>Bay B-02</td>
+                  <td><span class="status-ready">Ready to Ship</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#LTX-8015</strong></td>
+                  <td>Tirupur Circular Knit Single Jersey<br><small style="color:#666">32s Combed / Soft Hand Feel</small></td>
+                  <td>32s / 160 GSM</td>
+                  <td>18,750 kg</td>
+                  <td>250 kg</td>
+                  <td>₹285.00 /kg</td>
+                  <td>Bay C-01</td>
+                  <td><span class="status-pending">In Production</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#LTX-8007</strong></td>
+                  <td>Beypore Grey Sheeting Cloth<br><small style="color:#666">40s × 40s / Ready for Dye</small></td>
+                  <td>40s × 40s</td>
+                  <td>42,000 mtr</td>
+                  <td>1000 mtr</td>
+                  <td>₹68.00 /mtr</td>
+                  <td>Bay B-11</td>
+                  <td><span class="status-ready">Ready to Ship</span></td>
+                </tr>
+                <tr>
+                  <td><strong>#LTX-7992</strong></td>
+                  <td>Malabar Drill Workwear Fabric<br><small style="color:#666">20s × 16s / Heavy Duty</small></td>
+                  <td>20s × 16s / 240 GSM</td>
+                  <td>9,800 mtr</td>
+                  <td>500 mtr</td>
+                  <td>₹112.00 /mtr</td>
+                  <td>Bay A-15</td>
+                  <td><span class="status-ready">Ready to Ship</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="telemetry">
+          <h3>🏭 Loom Mills Telemetry</h3>
+          <div class="telemetry-item">
+            <div class="top">
+              <div class="name">Kannur Handloom Weavers Guild</div>
+              <div class="cap">92% Cap.</div>
+            </div>
+            <div class="line">Line: 100s Pure Kasavu Jacquard Borders</div>
+            <div class="meta">
+              <span>Shuttle Speed: 140 rpm</span>
+              <span>Est. 1,400 pcs/day</span>
+            </div>
+            <div class="cap-bar"><div class="fill" style="width:92%"></div></div>
+          </div>
+          <div class="telemetry-item">
+            <div class="top">
+              <div class="name">Tirupur Knit Sourcing Depot</div>
+              <div class="cap">86% Cap.</div>
+            </div>
+            <div class="line">Line: 32s Circular Knit Single Jersey</div>
+            <div class="meta">
+              <span>24 Circular Machines Online</span>
+              <span>Bale Pack: 18 Tonnes</span>
+            </div>
+            <div class="cap-bar"><div class="fill" style="width:86%"></div></div>
+          </div>
+          <div class="telemetry-item">
+            <div class="top">
+              <div class="name">Calicut Powerloom Cluster</div>
+              <div class="cap">78% Cap.</div>
+            </div>
+            <div class="line">Line: 60s Chequered Lungi (Mercerised)</div>
+            <div class="meta">
+              <span>42 Looms Active</span>
+              <span>Est. 9,200 pcs/day</span>
+            </div>
+            <div class="cap-bar"><div class="fill" style="width:78%"></div></div>
+          </div>
+          <div class="telemetry-item">
+            <div class="top">
+              <div class="name">Beypore Grey Mill Unit</div>
+              <div class="cap">71% Cap.</div>
+            </div>
+            <div class="line">Line: 40s Unbleached Sheeting</div>
+            <div class="meta">
+              <span>16 Looms Running</span>
+              <span>Output: 6.2 km/day</span>
+            </div>
+            <div class="cap-bar"><div class="fill" style="width:71%"></div></div>
+          </div>
+          <div class="telemetry-item">
+            <div class="top">
+              <div class="name">Malabar Workwear Unit (A)</div>
+              <div class="cap">64% Cap.</div>
+            </div>
+            <div class="line">Line: Poly-Cotton Twill Drill</div>
+            <div class="meta">
+              <span>12 Machines Online</span>
+              <span>Est. 3.8 km/day</span>
+            </div>
+            <div class="cap-bar"><div class="fill" style="width:64%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function filterLots() {
+      const q = document.getElementById('lotFilter').value.toLowerCase();
+      document.querySelectorAll('#lotsBody tr').forEach(row => {
+        row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    document.querySelectorAll('.qbtn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const original = this.innerHTML;
+        this.innerHTML = '✓ Queued';
+        this.style.background = '#e8f5e9';
+        setTimeout(() => {
+          this.innerHTML = original;
+          this.style.background = '';
+        }, 1200);
+      });
+    });
+  </script>
+</body>
+</html>
